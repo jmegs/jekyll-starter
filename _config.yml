@@ -1,0 +1,17 @@
+name: SITE NAME
+description: SITE DESCRIPTION
+exclude: ["node_modules", "gulpfile.babel.js", "package.json", "yarn.lock", ".babelrc", "webpack.config.js"]
+permalink: pretty
+author: AUTHOR NAME
+
+# Collections
+# Set this to a collection name with 
+# a corresponding folder called _COLLECTION_NAME
+
+# collections:
+#   projects:
+#     output: true
+#     permalink: /:collection/:path/
+
+# Custom Configs accessible as site.VARIABLE
+image_url: "/assets/images"
