@@ -31,7 +31,8 @@ const paths = {
 }
 
 // nuke the assets folder
-export const clean = () => del(["_site"])
+// because of a bug in del, you have to ignore the parent explicitly
+export const clean = () => del(["_site", "assets/**", "!assets"])
 
 // compile styles in dev
 export function styles() {
@@ -90,7 +91,8 @@ export function server() {
     }
   })
 }
+const init = gulp.series(clean, jekyll_once, gulp.parallel(styles, scripts))
 
-const dev = gulp.series(clean, jekyll_once, gulp.parallel(watch, server))
+const dev = gulp.series(init, gulp.parallel(watch, server))
 gulp.task("dev", dev)
 gulp.task("default", dev)
