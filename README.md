@@ -22,3 +22,8 @@ yarn
 # run dev server
 yarn start
 ```
+
+## Todo
+
+* Right now the image task only copies images over, it will eventually compress them and set up proper retina resolution copies etc.
+* Also exploring ways to pull data in via a request inside the gulpfile that outputs to `_data/data.yml`.
