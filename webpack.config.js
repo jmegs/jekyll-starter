@@ -1,5 +1,4 @@
 module.exports = {
-  watch: false,
   module: {
     rules: [
       {
