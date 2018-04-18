@@ -1,8 +1,23 @@
+# Metadata
 name: SITE NAME
 description: SITE DESCRIPTION
-exclude: ["node_modules", "gulpfile.babel.js", "package.json", "yarn.lock", ".babelrc", "webpack.config.js"]
+author: jmegs
+
+# Where things are
+# changing this to have a clean site directory
+source: ./site
+destination: ./dist
+
+# File Handling
+exclude: ["node_modules", "gulpfile.babel.js", "package.json", "yarn.lock", ".babelrc", "webpack.config.js", "netlify.toml"]
+
+# Conversion
+markdown: redcarpet
+redcarpet:
+  extensions: ["smart", "tables", "fenced_code_blocks", "footnotes", "highlight"]
+
+# Output
 permalink: pretty
-author: AUTHOR NAME
 
 # Collections
 # Set this to a collection name with 
@@ -14,4 +29,4 @@ author: AUTHOR NAME
 #     permalink: /:collection/:path/
 
 # Custom Configs accessible as site.VARIABLE
-image_url: "/assets/images"
+# image_url: "/assets/images"

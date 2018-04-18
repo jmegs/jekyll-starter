@@ -30,25 +30,25 @@ const browserSync = bs.create()
 // Tell gulp where all the files are in one place
 const paths = {
   styles: {
-    src: "_src/styles/**/*.styl",
-    dest: "assets/styles/",
-    inject: "_site/assets/styles/"
+    src: "src/css/**/*.styl",
+    dest: "site/assets/css/",
+    inject: "dist/assets/css/"
   },
   scripts: {
-    src: "_src/scripts/app.js",
-    dest: "assets/scripts/",
-    inject: "_site/assets/scripts/"
+    src: "src/js/app.js",
+    dest: "site/assets/js/",
+    inject: "dist/assets/scripts/"
   },
   images: {
-    src: "_src/images/**/*",
-    dest: "assets/images/"
+    src: "src/img/**/*",
+    dest: "site/assets/img/"
   },
-  jekyll: ["*.html", "_layouts/*.html", "_projects/*"]
+  jekyll: ["site/**/*.html", "site/**/*.md", "site/_projects/*"]
 }
 
 // nuke the assets folder
 // because of a bug in del, you have to ignore the parent explicitly
-export const clean = () => del(["_site", "assets/**", "!assets"])
+export const clean = () => del(["dist", "site/assets/**", "!site/assets"])
 
 // Error handler
 // props to Brendan Falkowski
@@ -118,7 +118,7 @@ export function jekyll_once() {
 }
 
 export function watch() {
-  browserSync.init({ server: { baseDir: "_site" } })
+  browserSync.init({ server: { baseDir: "dist" } })
   gulp.watch(paths.scripts.src, scripts)
   gulp.watch(paths.styles.src, styles)
   gulp.watch(paths.jekyll, jekyll)
