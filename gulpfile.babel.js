@@ -5,12 +5,9 @@ import gulp from "gulp"
 import bs from "browser-sync"
 
 // Styles
-import stylus from "gulp-stylus"
-import poststylus from "poststylus"
-import rupture from "rupture"
-import prefix from "autoprefixer"
-import cleanCSS from "gulp-clean-css"
-import rename from "gulp-rename"
+import postcss from "gulp-postcss"
+import atImport from "postcss-import"
+import cssnext from "postcss-cssnext"
 
 // JS
 import webpack from "webpack-stream"
@@ -20,7 +17,6 @@ import del from "del"
 import cp from "child_process"
 
 // Error handling
-import gutil from "gulp-util"
 import plumber from "gulp-plumber"
 import notify from "gulp-notify"
 
@@ -30,7 +26,7 @@ const browserSync = bs.create()
 // Tell gulp where all the files are in one place
 const paths = {
   styles: {
-    src: "src/css/**/*.styl",
+    src: "src/css/*.css",
     dest: "site/assets/css/",
     inject: "dist/assets/css/"
   },
@@ -54,24 +50,23 @@ export const clean = () => del(["dist", "site/assets/**", "!site/assets"])
 // props to Brendan Falkowski
 // https://github.com/mikaelbr/gulp-notify/issues/81#issuecomment-268852774
 const handleError = error => {
-  const chalk = gutil.colors.red
-  let message = chalk(`${error.message.split("\n")[0]}`)
+  let message = `${error.message.split("\n")[0]}`
 
   notify({
-    title: chalk(`${error.plugin} error!`),
-    message: `\n at ${message}`,
+    // title: chalk(`${error.plugin} error!`),
+    title: `${error.plugin}`,
+    message: `\n ${message}`,
     sound: "Sosumi"
   }).write(error)
 }
 
 // compile styles in dev
 export function styles() {
+  const cssconfig = [atImport({ from: "./src/css/main.css" }), cssnext()]
   return gulp
-    .src(paths.styles.src, { sourcemaps: true })
+    .src(paths.styles.src)
     .pipe(plumber({ errorHandler: handleError }))
-    .pipe(stylus({ use: [rupture(), poststylus([prefix])] }))
-    .pipe(cleanCSS())
-    .pipe(rename({ basename: "main", suffix: ".min" }))
+    .pipe(postcss(cssconfig))
     .pipe(gulp.dest(paths.styles.inject))
     .pipe(browserSync.stream())
     .pipe(gulp.dest(paths.styles.dest))
