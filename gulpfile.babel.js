@@ -37,9 +37,9 @@ const paths = {
   },
   images: {
     src: "src/img/**/*",
-    dest: "site/assets/img/"
+    dest: "site/img/"
   },
-  jekyll: ["site/**/*.html", "site/**/*.md", "site/_projects/*"]
+  jekyll: ["site/**/*", "!site/assets/**/*"]
 }
 
 // nuke the assets folder

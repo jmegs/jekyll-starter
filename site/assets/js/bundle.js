@@ -2600,7 +2600,7 @@ var arrowFunction = function arrowFunction(greeting) {
   return greeting;
 };
 
-console.log(arrowFunction("hello from arrow function"));
+console.log(arrowFunction("hello from an arrow function"));
 console.log((0, _dateFns.format)(new Date(), "[Today is a] dddd"));
 
 /***/ }),
