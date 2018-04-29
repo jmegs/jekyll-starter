@@ -122,8 +122,8 @@ export function watch() {
 // Creates an initial build of the site
 export const build = gulp.series(
   clean,
-  jekyll_once,
-  gulp.parallel(styles, scripts)
+  gulp.parallel(styles, scripts),
+  jekyll_once
 )
 
 // Builds once then watches for changes
